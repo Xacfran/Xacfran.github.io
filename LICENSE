@@ -1,0 +1,116 @@
+Copyright (c) 2022-2026 Francisco X. Castellanos. All rights reserved.
+
+
+SUMMARY
+-------
+
+The templates this site was built on are free, and you can download them
+yourself from BootstrapMade at the links below. They have been heavily
+modified here, and those modifications are not free to reuse.
+
+The writing, research figures, resume and CV content, reworked
+navigation, and the custom code in this repository are my own work. No
+permission is granted to copy, modify, redistribute or republish any of it.
+
+If you would like to use something here, ask me: francisco@batsandbytes.com
+
+
+WHAT IS MINE
+------------
+
+All rights reserved on the following. No license is granted, and none is
+implied by this repository being public:
+
+  - All written content: biography, research descriptions, project
+    descriptions, resume and all entries therein.
+
+  - All scientific figures, plots and diagrams in assets/img/, including the
+    portfolio figures. These are my own research output. They may not be
+    reused, modified or redistributed without prior written permission.
+
+  - All modifications made to the original template, including:
+
+      the custom CSS in assets/css/style.css and the custom JavaScript in
+      assets/js/main.js;
+
+      the portfolio paging and filtering;
+
+      the figure slider on the project detail pages, which the original
+      template shipped without ever starting, together with the navigation
+      arrows and the cyan paging controls that move with them;
+
+      the lightbox caption rework, which nests the caption inside the media
+      box so it lines up with the image at any aspect ratio;
+
+      the contact form integration and its captcha handling.
+
+    The navigation is the exception within this list. Its structure, styling
+    and scrollspy behaviour come from the MyResume template credited below.
+    What is mine there is the adaptation: the menu entries, the
+    colours, and the integration with the rest of this site.
+
+Forking this repository on GitHub is permitted by GitHub's Terms of Service,
+yet no permission is granted to reuse this material in your own project,
+published or otherwise.
+
+
+WHAT IS NOT MINE
+----------------
+
+These components belong to their authors and remain under their own licenses.
+Nothing in this file claims any right over them, and nothing here restricts
+your use of them. You can freely obtain them from their own sources,
+not from this repository.
+
+  iPortfolio template, v3.7.0 — BootstrapMade
+    https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+    The base this site is built on, heavily modified here. Download it from
+    the link above rather than copying it out of this repository.
+
+  MyResume template — BootstrapMade
+    https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+    The site navigation comes from this template: the header layout, the
+    navmenu markup and styling, the CSS custom property naming, and the
+    navmenuScrollspy function in assets/js/main.js, which is used unchanged.
+
+  Both templates are licensed under https://bootstrapmade.com/license/
+    Free to use. The free tier is for personal projects and requires the
+    "Designed by BootstrapMade" credit to stay in the footer, which it does.
+
+  Isotope — Metafizzy
+    Licensed GPLv3 for open source use. A commercial license is required for
+    commercial use. Used here under the GPLv3 terms.
+    https://isotope.metafizzy.co/
+
+  MIT licensed, each under its own copyright:
+    Bootstrap, Bootstrap Icons, Swiper, AOS, GLightbox, imagesLoaded,
+    PureCounter, Waypoints, Typed.js, Boxicons
+
+  Academicons — loaded from jsDelivr for the ORCID, Google Scholar and
+    ResearchGate icons. SIL OFL 1.1 / MIT.
+
+  Web3Forms — https://web3forms.com/
+    The contact form posts to their API and is used on their free plan. The
+    form markup and the access key in index.html are theirs to define, not
+    mine. The service, its API and its terms belong to Web3Forms.
+
+  hCaptcha — https://www.hcaptcha.com/
+    The spam check in front of the contact form, delivered through the
+    Web3Forms free plan above. The widget and the service are hCaptcha's.
+
+    Both services are used here free of charge under their own terms. Nothing
+    in this file claims any right over either of them, and the access key in
+    index.html is specific to this site.
+
+  Photographs — Andres Saa, https://andressaa.com/
+    Used here with permission. They are his work, not mine, and are not
+    covered by the rights reserved above. Do not reuse them without
+    written permission.
+
+
+NOTE
+----
+
+This file states what is and is not permitted. It is not legal advice and it
+is not a negotiated agreement. If you need something beyond what it allows,
+write to francisco@batsandbytes.com and ask.
