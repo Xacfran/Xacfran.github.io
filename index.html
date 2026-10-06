@@ -582,12 +582,6 @@
           <div class="col-lg-5">
             <div class="info">
 
-              <div class="phone">
-                <i class="bi bi-globe"></i>
-                <h4>Website:</h4>
-                <p><a href="https://osoandino.org">www.osoandino.org</a></p>
-              </div>
-
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
@@ -605,9 +599,9 @@
                 </p>
               </div>
 
-              <iframe
+              <iframe class="map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1661.8983426713978!2d-101.878673804!3d33.584627768581015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86fe12ae06e06849%3A0x27e526038231beb6!2sDepartment%20of%20Biological%20Sciences!5e0!3m2!1sen!2sus!4v1657905102269!5m2!1sen!2sus"
-                frameborder="0" height="950px" style="border:0; width: 100%; height: 290px;" allowfullscreen>
+                frameborder="0" style="border:0;" allowfullscreen>
               </iframe>
             </div>
 
@@ -648,12 +642,18 @@
                 <div class="col-md-12 text-center">
                   <div class="loading">Loading</div>
                   <div class="error-message"></div>
-                  <!-- TO DO: Redirect to a thank you page or a rectangle overlays that doesn't look good -->
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
 
                   <button type="submit">Send Message</button>
                 </div>
 
+              </div>
+
+              <!-- Replaces the fields once a message goes through -->
+              <div class="sent-panel" hidden>
+                <i class="bi bi-check2" aria-hidden="true"></i>
+                <h4 tabindex="-1">Message sent</h4>
+                <p>Thanks<span class="sent-name"></span>. I'll get back to you at <span class="sent-email"></span>.</p>
+                <button type="button" class="sent-again">Send another message</button>
               </div>
             </form>
           </div><!-- End Contact Form -->
@@ -729,7 +729,27 @@
 
       const loading = form.querySelector('.loading');
       const errorMessage = form.querySelector('.error-message');
-      const sentMessage = form.querySelector('.sent-message');
+      const nameField = form.querySelector('#name-field');
+      const emailField = form.querySelector('#email-field');
+      const sentPanel = form.querySelector('.sent-panel');
+
+      // Sizing lives in the stylesheet. Focusing the heading also scrolls it
+      // into view when the card shrinks on stacked layouts
+      function showSent(name, email) {
+        const firstName = name.trim().split(/\s+/)[0];
+        sentPanel.querySelector('.sent-name').textContent = firstName ? ', ' + firstName : '';
+        sentPanel.querySelector('.sent-email').textContent = email.trim();
+
+        form.classList.add('is-sent');
+        sentPanel.hidden = false;
+        sentPanel.querySelector('h4').focus();
+      }
+
+      sentPanel.querySelector('.sent-again').addEventListener('click', function () {
+        sentPanel.hidden = true;
+        form.classList.remove('is-sent');
+        nameField.focus();
+      });
 
       function showError(text) {
         loading.classList.remove('d-block');
@@ -737,16 +757,26 @@
         errorMessage.classList.add('d-block');
       }
 
-      // A captcha token is valid for one submission only, so clear it after every attempt
-      function resetCaptcha() {
-        if (window.hcaptcha) window.hcaptcha.reset();
+      // A captcha token is valid for one submission only, so clear it after every attempt.
+      // The reset pulls focus into the captcha frame a moment later, so when a target is
+      // given, focus is sent back to it if that happens within the next second
+      function resetCaptcha(focusTarget) {
+        if (!window.hcaptcha) return;
+        if (focusTarget) {
+          const widget = form.querySelector('.h-captcha');
+          const sendBack = () => {
+            if (widget.contains(document.activeElement)) focusTarget.focus();
+          };
+          window.addEventListener('blur', sendBack);
+          setTimeout(() => window.removeEventListener('blur', sendBack), 1000);
+        }
+        window.hcaptcha.reset();
       }
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
 
         errorMessage.classList.remove('d-block');
-        sentMessage.classList.remove('d-block');
 
         const captcha = form.querySelector('[name="h-captcha-response"]');
         if (captcha && !captcha.value) {
@@ -765,9 +795,9 @@
           .then(data => {
             if (data.success) {
               loading.classList.remove('d-block');
-              sentMessage.classList.add('d-block');
+              showSent(nameField.value, emailField.value);
               form.reset();
-              resetCaptcha();
+              resetCaptcha(sentPanel.querySelector('h4'));
             } else {
               showError(data.message || 'Message not sent. Please email me directly at xacfran@gmail.com');
               resetCaptcha();
